@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gêmeos de Aniversário</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1> Gêmeos de Aniversário</h1>
+        <p>Descubra quais craques do futebol nasceram no mesmo dia que você</p>
+    </header>
+
+    <main class="container">
+        <section class="card">
+            <h2>Selecione o dia e o mês do seu nascimento</h2>
+            <form id="form-busca" class="flex-form">
+                <select id="dia-nascimento" required>
+                    <option value="" disabled selected>Dia</option>
+                    <script>
+                        for (let i = 1; i <= 31; i++) {
+                            document.write(`<option value="${i}">${i}</option>`);
+                        }
+                    </script>
+                </select>
+                <select id="mes-nascimento" required>
+                    <option value="" disabled selected>Mês</option>
+                    <option value="1">Janeiro</option>
+                    <option value="2">Fevereiro</option>
+                    <option value="3">Março</option>
+                    <option value="4">Abril</option>
+                    <option value="5">Maio</option>
+                    <option value="6">Junho</option>
+                    <option value="7">Julho</option>
+                    <option value="8">Agosto</option>
+                    <option value="9">Setembro</option>
+                    <option value="10">Outubro</option>
+                    <option value="11">Novembro</option>
+                    <option value="12">Dezembro</option>
+                </select>
+
+                <button type="submit">Encontrar Gêmeos</button>
+            </form>
+        </section>
+
+        <section class="card">
+            <h2> Seus Gêmeos Encontrados (usando uma API da Wikipedia)</h2>
+            <div id="resultado-gemeos" class="grid-resultados">
+                <p class="placeholder">Irá aparecer nessa tela quem são seus Gêmeos de aniversário.</p>
+            </div>
+        </section>
+
+        <section class="card full-width">
+            <h2>Gêmeos Salvos (MySQL)</h2>
+            <ul id="lista-gemeos" class="lista-historico">
+                </ul>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

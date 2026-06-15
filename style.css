@@ -1,0 +1,132 @@
+:root {
+    --primary: #0984e3;
+    --secondary: #74b9ff;
+    --bg: #f1f2f6;
+    --card-bg: #ffffff;
+    --text: #2f3542;
+}
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: 'Segoe UI', system-ui, sans-serif; 
+}
+
+body { 
+    background: var(--bg); 
+    color: var(--text); 
+    padding: 30px; 
+}
+
+header { 
+    text-align: center; 
+    margin-bottom: 40px; 
+}
+
+header h1 { 
+    color: var(--primary); 
+    font-size: 2.5rem; 
+    margin-bottom: 5px; 
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 25px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.full-width { 
+    grid-column: 1 / -1; 
+}
+
+.card {
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.06);
+}
+
+.card h2 { 
+    margin-bottom: 20px; 
+    font-size: 1.25rem; 
+    color: var(--primary); 
+}
+
+/* Flexbox ajustado para os seletores de Dia, Mês e o Botão */
+.flex-form {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+select, button {
+    padding: 12px;
+    border-radius: 8px;
+    border: 2px solid #ced6e0;
+    font-size: 1rem;
+    background: white;
+}
+
+select {
+    flex: 1;
+    min-width: 80px;
+}
+
+button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+button:hover { 
+    background: #273c75; 
+}
+
+.grid-resultados {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+.gemeo-card {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border-left: 4px solid var(--primary);
+}
+
+.gemeo-card button {
+    background: #2ed573;
+    padding: 8px;
+    font-size: 0.85rem;
+}
+
+.gemeo-card button:hover { 
+    background: #26af5f; 
+}
+
+.lista-historico { 
+    list-style: none; 
+}
+
+.lista-historico li {
+    padding: 12px;
+    border-bottom: 1px solid #f1f2f6;
+    display: flex;
+    justify-content: space-between;
+}
+
+.placeholder { 
+    color: #a4b0be; 
+    text-align: center; 
+    font-style: italic; 
+}
