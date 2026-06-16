@@ -1,7 +1,6 @@
 const SUPABASE_URL = 'https://retwzkxbuezuznwwejkp.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJldHd6a3hidWV6dXpud3dlamtwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE2MzIzNjYsImV4cCI6MjA5NzIwODM2Nn0.x1mWOE2fZU34FaqJMF-NOIgwSHyD4AKudZm-f_cTVfg';
 
-// LISTA DE PRIORIDADE GIGANTE: Bolas de Ouro, Campeões do Mundo e Astros Internacionais
 const superEstrelas = [
     'neymar', 'cristiano ronaldo', 'messi', 'ronaldinho', 'ronaldo', 'kaká', 'benzema', 'modrić', 
     'mbappé', 'haaland', 'lewandowski', 'kane', 'bellingham', 'vinícius', 'vini jr', 'salah', 
@@ -18,7 +17,6 @@ const superEstrelas = [
     'marta', 'alexia putellas', 'aitana bonmatí', 'sam kerr', 'morgan', 'rapinoe'
 ];
 
-// 1. CONSUMO DE API: Captura o Dia/Mês e prioriza os jogadores mais famosos do mundo
 document.getElementById('form-busca').addEventListener('submit', async (e) => {
     e.preventDefault(); 
     
@@ -79,7 +77,7 @@ document.getElementById('form-busca').addEventListener('submit', async (e) => {
     }
 });
 
-// 2. INTEGRAÇÃO COM BANCO EM NUVEM (SUPABASE)
+
 async function salvarGemeo(nome, detalhes) {
     try {
         const response = await fetch(`${SUPABASE_URL}/rest/v1/gemeos_salvos`, {
@@ -136,5 +134,4 @@ async function carregarGemeos() {
     }
 }
 
-// Inicializa a lista de craques salvos assim que a página abre
 carregarGemeos();
