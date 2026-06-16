@@ -1,5 +1,5 @@
-// URL do túnel do Localtunnel que conecta a Vercel ao seu notebook
-const API_URL = 'https://all-pugs-walk.loca.lt/api/gemeos';
+// URL do túnel atualizada para o novo link gerado no seu notebook
+const API_URL = 'https://itchy-badgers-hope.loca.lt/api/gemeos';
 
 // LISTA DE PRIORIDADE GIGANTE: Bolas de Ouro, Campeões do Mundo e Astros Internacionais
 const superEstrelas = [
@@ -34,7 +34,7 @@ document.getElementById('form-busca').addEventListener('submit', async (e) => {
         const response = await fetch(`https://api.wikimedia.org/feed/v1/wikipedia/en/onthisday/births/${mes}/${dia}`);
         const data = await response.json();
         let jogadores = data.births.filter(pessoa => {
-            const descricao = pessoa.text.toLowerCase();
+            const descricao = Diagnostics = pessoa.text.toLowerCase();
             return descricao.includes('footballer') || 
                    descricao.includes('football player') || 
                    descricao.includes('soccer');
@@ -65,7 +65,7 @@ document.getElementById('form-busca').addEventListener('submit', async (e) => {
             const botao = document.createElement('button');
             botao.innerText = ' Escalar para o Meu Time';
             botao.addEventListener('click', () => {
-                salvarGemeo(jogador.text, `Jogador de futebol de destaque international, nascido em ${jogador.year}`);
+                salvarGemeo(jogador.text, `Jogador de futebol de destaque internacional, nascido em ${jogador.year}`);
             });
 
             card.appendChild(infoDiv);
@@ -102,7 +102,6 @@ async function carregarGemeos() {
         const dados = await response.json();
         
         const lista = document.getElementById('lista-gemeos');
-        textValue = '';
         lista.innerHTML = '';
         
         if (dados.length === 0) {
