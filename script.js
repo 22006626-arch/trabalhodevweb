@@ -1,5 +1,5 @@
-// URL do túnel atualizada para o novo link gerado no seu notebook
-const API_URL = 'http://localhost:3000/api/gemeos';
+const SUPABASE_URL = 'https://retwzkxbuezuznwwejkp.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJldHd6a3hidWV6dXpud3dlamtwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE2MzIzNjYsImV4cCI6MjA5NzIwODM2Nn0.x1mWOE2fZU34FaqJMF-NOIgwSHyD4AKudZm-f_cTVfg';
 
 // LISTA DE PRIORIDADE GIGANTE: Bolas de Ouro, Campeões do Mundo e Astros Internacionais
 const superEstrelas = [
@@ -34,7 +34,7 @@ document.getElementById('form-busca').addEventListener('submit', async (e) => {
         const response = await fetch(`https://api.wikimedia.org/feed/v1/wikipedia/en/onthisday/births/${mes}/${dia}`);
         const data = await response.json();
         let jogadores = data.births.filter(pessoa => {
-            const descricao = Diagnostics = pessoa.text.toLowerCase();
+            const descricao = pessoa.text.toLowerCase();
             return descricao.includes('footballer') || 
                    descricao.includes('football player') || 
                    descricao.includes('soccer');
@@ -78,7 +78,6 @@ document.getElementById('form-busca').addEventListener('submit', async (e) => {
         resultadoContainer.innerHTML = '<p class="placeholder" style="color: #ff4757;">Não foi possível consultar os astros do futebol.</p>';
     }
 });
-
 async function salvarGemeo(nome, detalhes) {
     try {
         const response = await fetch(API_URL, {
@@ -95,7 +94,6 @@ async function salvarGemeo(nome, detalhes) {
         console.error('Erro ao registrar no backend:', error);
     }
 }
-
 async function carregarGemeos() {
     try {
         const response = await fetch(API_URL);
