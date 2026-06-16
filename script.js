@@ -1,4 +1,5 @@
-const API_URL = 'http://localhost:3000/api/gemeos';
+// URL do túnel do Localtunnel que conecta a Vercel ao seu notebook
+const API_URL = 'https://all-pugs-walk.loca.lt/api/gemeos';
 
 // LISTA DE PRIORIDADE GIGANTE: Bolas de Ouro, Campeões do Mundo e Astros Internacionais
 const superEstrelas = [
@@ -64,7 +65,7 @@ document.getElementById('form-busca').addEventListener('submit', async (e) => {
             const botao = document.createElement('button');
             botao.innerText = ' Escalar para o Meu Time';
             botao.addEventListener('click', () => {
-                salvarGemeo(jogador.text, `Jogador de futebol de destaque internacional, nascido em ${jogador.year}`);
+                salvarGemeo(jogador.text, `Jogador de futebol de destaque international, nascido em ${jogador.year}`);
             });
 
             card.appendChild(infoDiv);
@@ -77,6 +78,7 @@ document.getElementById('form-busca').addEventListener('submit', async (e) => {
         resultadoContainer.innerHTML = '<p class="placeholder" style="color: #ff4757;">Não foi possível consultar os astros do futebol.</p>';
     }
 });
+
 async function salvarGemeo(nome, detalhes) {
     try {
         const response = await fetch(API_URL, {
@@ -93,12 +95,14 @@ async function salvarGemeo(nome, detalhes) {
         console.error('Erro ao registrar no backend:', error);
     }
 }
+
 async function carregarGemeos() {
     try {
         const response = await fetch(API_URL);
         const dados = await response.json();
         
         const lista = document.getElementById('lista-gemeos');
+        textValue = '';
         lista.innerHTML = '';
         
         if (dados.length === 0) {
