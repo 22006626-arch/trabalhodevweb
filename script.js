@@ -78,32 +78,48 @@ document.getElementById('form-busca').addEventListener('submit', async (e) => {
         resultadoContainer.innerHTML = '<p class="placeholder" style="color: #ff4757;">Não foi possível consultar os astros do futebol.</p>';
     }
 });
+
+// 2. INTEGRAÇÃO COM BANCO EM NUVEM (SUPABASE)
 async function salvarGemeo(nome, detalhes) {
     try {
-        const response = await fetch(API_URL, {
+        const response = await fetch(`${SUPABASE_URL}/rest/v1/gemeos_salvos`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'apikey': SUPABASE_KEY,
+                'Authorization': `Bearer ${SUPABASE_KEY}`,
+                'Content-Type': 'application/json',
+                'Prefer': 'return=minimal'
+            },
             body: JSON.stringify({ nome, detalhes })
         });
 
         if (response.ok) {
-            alert(`${nome} foi salvo no seu banco de dados MySQL!`);
+            alert(`${nome} foi escalado e salvo direto na nuvem do Supabase!`);
             carregarGemeos(); 
+        } else {
+            console.error('Erro na resposta do Supabase:', response.statusText);
         }
     } catch (error) {
-        console.error('Erro ao registrar no backend:', error);
+        console.error('Erro ao registrar na nuvem:', error);
     }
 }
+
 async function carregarGemeos() {
     try {
-        const response = await fetch(API_URL);
-        const dados = await response.json();
+        const response = await fetch(`${SUPABASE_URL}/rest/v1/gemeos_salvos?select=*&order=data_descoberta.desc`, {
+            method: 'GET',
+            headers: {
+                'apikey': SUPABASE_KEY,
+                'Authorization': `Bearer ${SUPABASE_KEY}`
+            }
+        });
         
+        const dados = await response.json();
         const lista = document.getElementById('lista-gemeos');
         lista.innerHTML = '';
         
         if (dados.length === 0) {
-            lista.innerHTML = '<li class="placeholder">Nenhum craque salvo no banco local ainda.</li>';
+            lista.innerHTML = '<li class="placeholder">Nenhum craque salvo no banco de nuvem ainda.</li>';
             return;
         }
 
@@ -116,7 +132,9 @@ async function carregarGemeos() {
             lista.appendChild(li);
         });
     } catch (error) {
-        console.error('Erro de conexão com o banco de dados:', error);
+        console.error('Erro de conexão com o banco de nuvem:', error);
     }
 }
+
+// Inicializa a lista de craques salvos assim que a página abre
 carregarGemeos();
