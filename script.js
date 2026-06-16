@@ -1,5 +1,5 @@
-// URL do túnel atualizada para o novo link ativo do seu notebook
-const API_URL = 'https://real-cases-sit.loca.lt/api/gemeos';
+// URL do túnel atualizada para o novo link gerado no seu notebook
+const API_URL = 'http://localhost:3000/api/gemeos';
 
 // LISTA DE PRIORIDADE GIGANTE: Bolas de Ouro, Campeões do Mundo e Astros Internacionais
 const superEstrelas = [
@@ -34,7 +34,7 @@ document.getElementById('form-busca').addEventListener('submit', async (e) => {
         const response = await fetch(`https://api.wikimedia.org/feed/v1/wikipedia/en/onthisday/births/${mes}/${dia}`);
         const data = await response.json();
         let jogadores = data.births.filter(pessoa => {
-            const descricao = pessoa.text.toLowerCase();
+            const descricao = Diagnostics = pessoa.text.toLowerCase();
             return descricao.includes('footballer') || 
                    descricao.includes('football player') || 
                    descricao.includes('soccer');
