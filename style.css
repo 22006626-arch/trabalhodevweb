@@ -55,7 +55,6 @@ header h1 {
     color: var(--primary); 
 }
 
-/* Flexbox ajustado para os seletores de Dia, Mês e o Botão */
 .flex-form {
     display: flex;
     gap: 10px;
