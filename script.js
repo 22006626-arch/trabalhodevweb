@@ -63,7 +63,7 @@ document.getElementById('form-busca').addEventListener('submit', async (e) => {
             const botao = document.createElement('button');
             botao.innerText = ' Escalar para o Meu Time';
             botao.addEventListener('click', () => {
-                salvarGemeo(jogador.text, `Jogador de futebol de destaque internacional, nascido em ${jogador.year}`);
+                salvarGemeo(jogador.text, `Nascido em ${dia}/${mes}/${jogador.year} - Destaque do futebol internacional`);
             });
 
             card.appendChild(infoDiv);
@@ -76,7 +76,6 @@ document.getElementById('form-busca').addEventListener('submit', async (e) => {
         resultadoContainer.innerHTML = '<p class="placeholder" style="color: #ff4757;">Não foi possível consultar os astros do futebol.</p>';
     }
 });
-
 
 async function salvarGemeo(nome, detalhes) {
     try {
@@ -101,7 +100,6 @@ async function salvarGemeo(nome, detalhes) {
         console.error('Erro ao registrar na nuvem:', error);
     }
 }
-
 
 async function carregarGemeos() {
     try {
@@ -131,13 +129,14 @@ async function carregarGemeos() {
 
             li.innerHTML = `
                 <div>
-                    <span><strong>${item.nome}</strong> - ${item.detalhes}</span><br>
-                    <small style="color: #a4b0be;">Salvo em: ${new Date(item.data_descoberta).toLocaleDateString('pt-BR')}</small>
+                    <span><strong>${item.nome}</strong></span><br>
+                    <span style="font-size: 0.9rem; color: #4b5563;">${item.detalhes}</span><br>
+                    <small style="color: #a4b0be;">Escalado em: ${new Date(item.data_descoberta).toLocaleDateString('pt-BR')}</small>
                 </div>
             `;
 
             const botaoDeletar = document.createElement('button');
-            botaoDeletar.innerText = ' Remover';
+            botaoDeletar.innerText = '❌ Remover';
             botaoDeletar.style.backgroundColor = '#ff4757';
             botaoDeletar.style.color = 'white';
             botaoDeletar.style.border = 'none';
@@ -146,7 +145,6 @@ async function carregarGemeos() {
             botaoDeletar.style.cursor = 'pointer';
             botaoDeletar.style.fontSize = '0.85rem';
 
-            // Evento para chamar a função de deletar ao clicar
             botaoDeletar.addEventListener('click', () => {
                 if (confirm(`Tem certeza que deseja remover ${item.nome} do seu time?`)) {
                     deletarGemeo(item.id, item.nome);
