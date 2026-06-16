@@ -102,6 +102,7 @@ async function salvarGemeo(nome, detalhes) {
     }
 }
 
+
 async function carregarGemeos() {
     try {
         const response = await fetch(`${SUPABASE_URL}/rest/v1/gemeos_salvos?select=*&order=data_descoberta.desc`, {
@@ -123,14 +124,61 @@ async function carregarGemeos() {
 
         dados.forEach(item => {
             const li = document.createElement('li');
+            li.style.display = 'flex';
+            li.style.justifyContent = 'space-between';
+            li.style.alignItems = 'center';
+            li.style.marginBottom = '10px';
+
             li.innerHTML = `
-                <span><strong>${item.nome}</strong> - ${item.detalhes}</span>
-                <small style="color: #a4b0be;">Salvo em: ${new Date(item.data_descoberta).toLocaleDateString('pt-BR')}</small>
+                <div>
+                    <span><strong>${item.nome}</strong> - ${item.detalhes}</span><br>
+                    <small style="color: #a4b0be;">Salvo em: ${new Date(item.data_descoberta).toLocaleDateString('pt-BR')}</small>
+                </div>
             `;
+
+            const botaoDeletar = document.createElement('button');
+            botaoDeletar.innerText = ' Remover';
+            botaoDeletar.style.backgroundColor = '#ff4757';
+            botaoDeletar.style.color = 'white';
+            botaoDeletar.style.border = 'none';
+            botaoDeletar.style.padding = '5px 10px';
+            botaoDeletar.style.borderRadius = '4px';
+            botaoDeletar.style.cursor = 'pointer';
+            botaoDeletar.style.fontSize = '0.85rem';
+
+            // Evento para chamar a função de deletar ao clicar
+            botaoDeletar.addEventListener('click', () => {
+                if (confirm(`Tem certeza que deseja remover ${item.nome} do seu time?`)) {
+                    deletarGemeo(item.id, item.nome);
+                }
+            });
+
+            li.appendChild(botaoDeletar);
             lista.appendChild(li);
         });
     } catch (error) {
         console.error('Erro de conexão com o banco de nuvem:', error);
+    }
+}
+
+async function deletarGemeo(id, nome) {
+    try {
+        const response = await fetch(`${SUPABASE_URL}/rest/v1/gemeos_salvos?id=eq.${id}`, {
+            method: 'DELETE',
+            headers: {
+                'apikey': SUPABASE_KEY,
+                'Authorization': `Bearer ${SUPABASE_KEY}`
+            }
+        });
+
+        if (response.ok) {
+            alert(`${nome} foi removido do seu time na nuvem!`);
+            carregarGemeos(); 
+        } else {
+            console.error('Erro ao deletar no Supabase:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Erro ao conectar para deletar:', error);
     }
 }
 
