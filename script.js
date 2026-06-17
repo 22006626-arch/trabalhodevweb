@@ -34,7 +34,7 @@ document.getElementById('form-busca').addEventListener('submit', async (e) => {
         let jogadores = data.births.filter(pessoa => {
             const descricao = pessoa.text.toLowerCase();
             return descricao.includes('atleta') || 
-                   descricao.includes('jogadora) de futebol') || 
+                   descricao.includes('jogadora de futebol') || 
                    descricao.includes('futebol');
         });
         jogadores.sort((a, b) => {
