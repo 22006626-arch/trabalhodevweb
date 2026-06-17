@@ -33,9 +33,9 @@ document.getElementById('form-busca').addEventListener('submit', async (e) => {
         const data = await response.json();
         let jogadores = data.births.filter(pessoa => {
             const descricao = pessoa.text.toLowerCase();
-            return descricao.includes('atleta') || 
-                   descricao.includes('jogadora de futebol') || 
-                   descricao.includes('futebol');
+            return descricao.includes('footballer') || 
+                   descricao.includes('football player') || 
+                   descricao.includes('soccer');
         });
         jogadores.sort((a, b) => {
             const nomeA = a.text.toLowerCase();
